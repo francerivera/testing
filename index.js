@@ -18,7 +18,7 @@ const CollisionBlocks = []
 floorCollisions2d.forEach((row, y) => {
     row.forEach((symbol, x)=> {
         if(symbol === 202) {
-            CollisionBlocks.push(
+            collisionBlocks.push(
                 new CollisionBlock({
                     position: {
                         x: x * 16,
@@ -51,15 +51,14 @@ platformCollisions2D.forEach((row, y) => {
     })
 })
 
-const gravity = 0.5
+const gravity = 0.1
 
 const player = new Player({
-    x: 0,
-    y: 0,
-})
-const player2 = new Player({
-    x: 300,
-    y: 200,
+    position: {
+        x: 100,
+        y: 300,
+    },
+    collisionBlocks,
 })
 
 const keys = {
@@ -96,15 +95,15 @@ function animate() {
         block.update()
     })
 
-    platformCollisionBlocks
-    c.restore()
-
     player.update()
-    player2.update()
 
     player.velocity.x = 0
     if(keys.d.pressed) player.velocity.x = 5
     else if (keys.a.pressed) player.velocity.x = -5
+
+    c.restore()
+
+
 }
 
 animate()
