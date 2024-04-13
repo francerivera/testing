@@ -60,6 +60,7 @@ const player = new Player({
     },
     collisionBlocks,
     imageSrc: './images/warrior/Idle.png',
+    frameRate: 8,
 })
 
 const keys = {
