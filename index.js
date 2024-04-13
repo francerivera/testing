@@ -9,13 +9,13 @@ const scaledCanvas = {
     height: canvas.height / 4
 }
 
-const floorCollisions2d = []
+const floorCollisions2D = []
 for (let i = 0; i < floorCollisions.length; i += 36) {
-    floorCollisions2d.push(floorCollisions.slice(i, i + 36))
+    floorCollisions2D.push(floorCollisions.slice(i, i + 36))
 }
 
-const CollisionBlocks = []
-floorCollisions2d.forEach((row, y) => {
+const collisionBlocks = []
+floorCollisions2D.forEach((row, y) => {
     row.forEach((symbol, x)=> {
         if(symbol === 202) {
             collisionBlocks.push(
@@ -32,7 +32,7 @@ floorCollisions2d.forEach((row, y) => {
 
 const platformCollisions2D = []
 for (let i = 0; i < platformCollisions.length; i += 36) {
-  platformCollisions2D.push(platformCollisions.slice(i, i + 36))
+    platformCollisions2D.push(platformCollisions.slice(i, i + 36))
 }
 
 const platformCollisionBlocks = []
@@ -59,11 +59,12 @@ const player = new Player({
         y: 300,
     },
     collisionBlocks,
+    imageSrc: './images/warrior/Idle.png',
 })
 
 const keys = {
     d: {
-        pressed: false
+        pressed: false,
     },
     a: {
         pressed: false,
@@ -87,8 +88,8 @@ function animate() {
     c.scale(4, 4)
     c.translate(0, -background.image.height + scaledCanvas.height)
     background.update()
-    CollisionBlocks.forEach((CollisionBlock) => {
-        CollisionBlock.update()
+    collisionBlocks.forEach((collisionBlock) => {
+        collisionBlock.update()
     })
 
     platformCollisionBlocks.forEach((block) => {
@@ -117,7 +118,7 @@ window.addEventListener('keydown', (event) => {
             keys.a.pressed = true
             break
         case 'w':
-            player.velocity.y = -20
+            player.velocity.y = -4
             break
     }
 })
